@@ -1,0 +1,18 @@
+import React from 'react';
+
+class List extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+    componentDidMount(){
+    	console.log(this.props.match)
+    	let tempId = this.props.match.params.aa;
+    	this.setState({id:tempId})
+    }
+    render() { 
+        return (  <h2>List Page1111 -> {this.state.id}</h2> );
+    }
+}
+ 
+export default List;
