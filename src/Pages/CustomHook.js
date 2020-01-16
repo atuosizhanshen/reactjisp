@@ -5,7 +5,6 @@ function useWinSize(){
         width : document.documentElement.clientWidth,
         height : document.documentElement.clientHeight,
     })
-
     const onResize = useCallback(()=>{ // 目的是为了缓存方法(useMemo是为了缓存变量)
         console.log('进入callback')
         setSize({
@@ -14,10 +13,8 @@ function useWinSize(){
         })
     },[])
     useEffect(()=>{
-        console.log('进入了effect')
         window.addEventListener('resize',onResize)
         return ()=>{
-            console.log('进入了return effect')
             window.removeEventListener('resize',onResize)
         }
     },[onResize])
@@ -28,6 +25,7 @@ function useWinSize(){
 
 function Changesize(){
     const size = useWinSize();
+    console.log('customrender')
     return(
         <>
             <div>页面Size:{size.width}x{size.height}</div>
@@ -36,4 +34,4 @@ function Changesize(){
     )
 }
 
-export default Changesize
+export default React.memo(Changesize) 
